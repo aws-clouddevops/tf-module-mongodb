@@ -9,4 +9,4 @@ data "terraform_remote_state" "vpc" {
     }
 }
 
-#ref : 
+# ref: https://developer.hashicorp.com/terraform/language/state/remote-state-data
