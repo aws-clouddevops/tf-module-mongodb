@@ -5,7 +5,7 @@ resource "aws_docdb_cluster" "docdb" {
    engine                  = "docdb"
   master_username         = "admin1"
   master_password         = "roboshop1"
-  skip_final_snapshot     = true # True only during lab in prod, we will ytake a snapshot and that time this will be true
+  skip_final_snapshot     = true # True only during lab in prod, we will take a snapshot and that time this will be False
   db_subnet_group_name    = aws_docdb_subnet_group.docdb.name
 }
 
