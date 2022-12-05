@@ -10,19 +10,19 @@ resource "aws_docdb_cluster" "docdb" {
   vpc_security_group_ids  = [aws_security_group.allow_docdb.id]
 }
 
-resource "null_resource" "mongodb-schema" {
-  depends_on = [aws_db_instance.docdb]
+# resource "null_resource" "mongodb-schema" {
+#   depends_on = [aws_db_instance.docdb]
   
-  provisioner "local-exec" {
-    command = <<EOF
-   cd /tmp/
-   curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"   unzip mysql-main
-   unzip mongodb.zip
-   cd mongodb-main
-   mongo -h ${aws_db_instance.mysql.address}  -uadmin1 -pRoboShop1 < shipping.sql
-  EOF
-  }
-}
+#   provisioner "local-exec" {
+#     command = <<EOF
+#    cd /tmp/
+#    curl -s -L -o /tmp/mongodb.zip "https://github.com/stans-robot-project/mongodb/archive/main.zip"   unzip mysql-main
+#    unzip mongodb.zip
+#    cd mongodb-main
+#    mongo -h ${aws_db_instance.mysql.address}  -uadmin1 -pRoboShop1 < shipping.sql
+#   EOF
+#   }
+# }
 
 # Creates subnet group
 
