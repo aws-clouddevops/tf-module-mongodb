@@ -1,5 +1,5 @@
 resource "null_resource" "mongodb-schema" {
-   depends_on = [aws_db_instance.docdb]
+   depends_on = [aws_docdb_cluster.docdb]
   
     provisioner "local-exec" {
      command = <<EOF
