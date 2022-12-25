@@ -24,10 +24,10 @@ resource "aws_docdb_subnet_group" "docdb" {
 # Creates DocDB cluster instance and adds then to the cluster
 
 resource "aws_docdb_cluster_instance" "cluster_instances" {
-  count              = 1
+  count              = var.DOCDB_INSTANCE_COUNT
   identifier         = "roboshop-${var.ENV}"
   cluster_identifier = aws_docdb_cluster.docdb.id
-  instance_class     = "db.t3.medium"
+  instance_class     = var.DOCDB_INSTANCE_CLASS
 }
 
 # Creates Security group for DocumentDB
@@ -39,16 +39,16 @@ resource "aws_docdb_cluster_instance" "cluster_instances" {
 
    ingress {
      description      = "Allow Docdb Connection from default vpc"
-     from_port        = 27017
-     to_port          = 27017
+     from_port        = var.DOCDB_PORT
+     to_port          = var.DOCDB_PORT
      protocol         = "tcp"
      cidr_blocks      = [data.terraform_remote_state.vpc.outputs.DEFAULT_VPC_CIDR]
    }
 
    ingress {
      description      = "Allow docdb Connection from Private vpc"
-     from_port        = 3306
-     to_port          = 3306
+     from_port        = var.DOCDB_PORT
+     to_port          = var.DOCDB_PORT
      protocol         = "tcp"
      cidr_blocks      = [data.terraform_remote_state.vpc.outputs.VPC_CIDR]
    }
